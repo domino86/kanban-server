@@ -19,10 +19,8 @@ exports.getTodos = async function(query, page, limit){
 exports.createTodo = async function(todo){
 
     var newTodo = new ToDo({
-        title: todo.title,
-        description: todo.description,
-        date: new Date(),
-        status: todo.status
+        status: todo.status,
+        description: todo.content
     })
 
     try{
@@ -48,7 +46,6 @@ exports.updateTodo = async function(todo){
 
     console.log(oldTodo)
 
-    oldTodo.title = todo.title
     oldTodo.description = todo.description
     oldTodo.status = todo.status
 
@@ -64,7 +61,7 @@ exports.updateTodo = async function(todo){
 }
 
 exports.deleteTodo = async function(id){
-    
+
     try{
         var deleted = await ToDo.remove({_id: id})
         if(deleted.result.n === 0){
