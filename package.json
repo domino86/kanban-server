@@ -1,70 +1,21 @@
 {
-  "name": "easy-nodejs-setup",
+  "name": "todoapp",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "start": "npm run server",
-    "test": "standard && npm run karma:once && npm run mocha:once",
-    "watch": "npm-watch",
-    "standard:watch": "nodemon --exec 'npm run standard --silent'",
-    "server": "nodemon server.js --ignore app/",
-    "server:dist": "cd dist && nodemon server.js",
-    "karma:start": "npm run karma:watch",
-    "mocha:once": "istanbul cover _mocha test/backend/**/*.spec.js",
-    "mocha:watch": "mocha -w test/backend/**/*.spec.js",
-    "documentation": "markserv"
-  },
-  "watch": {
-    "standard": {
-      "patterns": [
-        "."
-      ],
-      "extensions": "js",
-      "quiet": true
-    }
-  },
-  "standard": {
-    "globals": [
-      "angular",
-      "describe",
-      "it",
-      "expect"
-    ]
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
-    "body-parser": "^1.15.2",
-    "connect-livereload": "^0.5.4",
-    "express": "^4.14.0",
-    "lite-server": "^2.2.2",
-    "livereload": "^0.4.1",
-    "lodash": "^4.16.4",
-    "markserv": "0.0.18",
-    "md-server": "0.0.5",
-    "mongodb": "^2.2.10",
-    "morgan": "^1.7.0",
-    "ws": "^1.1.1"
-  },
-  "devDependencies": {
-    "bundle-dependencies": "^1.0.2",
-    "copy": "^0.2.3",
-    "copyfiles": "^1.0.0",
-    "expect.js": "^0.3.1",
-    "istanbul": "^0.4.4",
-    "jasmine": "^2.4.1",
-    "jasmine-core": "^2.4.1",
-    "karma": "^1.0.0",
-    "karma-chrome-launcher": "^1.0.1",
-    "karma-coverage": "^1.0.0",
-    "karma-failed-reporter": "0.0.3",
-    "karma-jasmine": "^1.0.2",
-    "karma-jasmine-html-reporter": "^0.2.0",
-    "mkdirp": "^0.5.1",
-    "mocha": "^2.5.3",
-    "ng-annotate": "^1.2.1",
-    "nodemon": "^1.9.2",
-    "npm-ng-annotate": "0.0.1",
-    "npm-watch": "^0.1.4",
-    "rimraf": "^2.5.2",
-    "standard": "^7.1.2",
-    "usemin-cli": "0.0.8"
+    "bluebird": "^3.5.0",
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "ejs": "~2.5.6",
+    "express": "~4.15.2",
+    "mongoose": "^4.11.7",
+    "mongoose-paginate": "^5.0.3",
+    "morgan": "~1.8.1",
+    "nodemon": "^1.11.0",
+    "serve-favicon": "~2.4.2"
   }
 }
