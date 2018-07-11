@@ -3,8 +3,10 @@ var mongoosePaginate = require('mongoose-paginate')
 
 
 var ToDoSchema = new mongoose.Schema({
-    status: String,
-    description: String
+    title: String,
+    description: String,
+    date: Date,
+    status: String
 })
 
 ToDoSchema.plugin(mongoosePaginate)

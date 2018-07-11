@@ -20,9 +20,10 @@ exports.createTodo = async function(todo){
 
     var newTodo = new ToDo({
         status: todo.status,
-        description: todo.content
+        description: todo.description
     })
 
+    console.log(newTodo);
     try{
         var savedTodo = await newTodo.save()
         return savedTodo;

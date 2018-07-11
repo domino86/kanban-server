@@ -6,7 +6,7 @@ _this = this
 exports.getTodos = async function(req, res, next){
 
     var page = req.query.page ? req.query.page : 1
-    var limit = req.query.limit ? req.query.limit : 10; 
+    var limit = req.query.limit ? req.query.limit : 100;
 
     console.log(page, limit)
 
@@ -19,12 +19,13 @@ exports.getTodos = async function(req, res, next){
 }
 
 exports.createTodo = async function(req, res, next){
+    console.log(req.body.description);
     var todo = {
-        title: req.body.title,
         description: req.body.description,
         status: req.body.status
     }
 
+    console.log(todo);
     try{
         var createdTodo = await TodoService.createTodo(todo)
         return res.status(201).json({status: 201, data: createdTodo, message: "Succesfully Created ToDo"})
@@ -45,7 +46,6 @@ exports.updateTodo = async function(req, res, next){
 
     var todo = {
         id,
-        title: req.body.title ? req.body.title : null,
         description: req.body.description ? req.body.description : null,
         status: req.body.status ? req.body.status : null
     }
