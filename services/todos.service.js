@@ -35,13 +35,13 @@ exports.createTodo = async function(todo){
 exports.updateTodo = async function(todo){
     var id = todo.id
 
-    try{
+    try {
         var oldTodo = await ToDo.findById(id);
-    }catch(e){
+    } catch(e){
         throw Error("Error occured while Finding the Todo")
     }
 
-    if(!oldTodo){
+    if (!oldTodo){
         return false;
     }
 
@@ -53,23 +53,23 @@ exports.updateTodo = async function(todo){
 
     console.log(oldTodo)
 
-    try{
+    try {
         var savedTodo = await oldTodo.save()
         return savedTodo;
-    }catch(e){
+    } catch(e) {
         throw Error("And Error occured while updating the Todo");
     }
 }
 
 exports.deleteTodo = async function(id){
 
-    try{
+    try {
         var deleted = await ToDo.remove({_id: id})
         if(deleted.result.n === 0){
             throw Error("Todo Could not be deleted")
         }
         return deleted
-    }catch(e){
+    } catch(e) {
         throw Error("Error Occured while Deleting the Todo")
     }
 }
