@@ -19,7 +19,6 @@ exports.getTodos = async function(query, page, limit, sort) {
 exports.getTodo = async function(id) {
   try {
     var todo = await ToDo.findOne({_id: id});
-    console.log(todo);
     return todo;
   } catch (e) {
     throw Error('Error while getting Todo')

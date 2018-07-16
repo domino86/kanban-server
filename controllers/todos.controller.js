@@ -19,7 +19,7 @@ exports.getTodos = async function(req, res, next) {
 exports.getTodo = async function(req, res) {
   try {
     var todo = await TodoService.getTodo(req.params.id)
-    if (todo.data === 'null') {
+    if (todo.data === null) {
       return res.status(400).json({status: 400, message: 'This item doesn\'t exists'});
     } else {
       return res.status(200).json({status: 200, data: todo, message: "Succesfully Todo Recieved"});
