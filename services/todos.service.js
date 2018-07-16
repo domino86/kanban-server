@@ -2,7 +2,7 @@ var ToDo = require('../models/todo.model')
 
 _this = this
 
-exports.getTodos = async function(query, page, limit, sort){
+exports.getTodos = async function(query, page, limit, sort) {
   var options = {
     page,
     limit,
@@ -16,16 +16,17 @@ exports.getTodos = async function(query, page, limit, sort){
   }
 }
 
-exports.getTodo = async function(query){
+exports.getTodo = async function(id) {
   try {
-    var todo = await ToDo.paginate(query)
+    var todo = await ToDo.findOne({_id: id});
+    console.log(todo);
     return todo;
   } catch (e) {
     throw Error('Error while getting Todo')
   }
 }
 
-exports.createTodo = async function(todo){
+exports.createTodo = async function(todo) {
 
   var newTodo = new ToDo({
     status: todo.status,
@@ -42,7 +43,7 @@ exports.createTodo = async function(todo){
   }
 }
 
-exports.updateTodo = async function(todo){
+exports.updateTodo = async function(todo) {
   var id = todo.id
 
   try {
@@ -67,14 +68,14 @@ exports.updateTodo = async function(todo){
   }
 }
 
-exports.deleteTodo = async function(id){
+exports.deleteTodo = async function(id) {
 
   try {
     var deleted = await ToDo.remove({_id: id})
-    if(deleted.result.n === 0){
+    if (deleted.result.n === 0){
       throw Error("Todo Could not be deleted")
     }
-    return deleted
+    return deleted;
   } catch(e) {
     throw Error("Error Occured while Deleting the Todo")
   }

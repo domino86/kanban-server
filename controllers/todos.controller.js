@@ -2,13 +2,11 @@ var TodoService = require('../services/todos.service');
 
 _this = this;
 
-exports.getTodos = async function(req, res, next){
+exports.getTodos = async function(req, res, next) {
 
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 100;
     var sort = req.query.sort ? req.query.sort : { sort: 1 };
-
-    console.log(page, limit)
 
     try {
         var todos = await TodoService.getTodos({}, page, limit, sort)
@@ -18,17 +16,20 @@ exports.getTodos = async function(req, res, next){
     }
 }
 
-exports.getTodo = async function(req, res){
-
+exports.getTodo = async function(req, res) {
   try {
-    var todo = await TodoService.getTodo({})
-    return res.status(200).json({status: 200, data: todo, message: "Succesfully Todo Recieved"});
+    var todo = await TodoService.getTodo(req.params.id)
+    if (todo.data === 'null') {
+      return res.status(400).json({status: 400, message: 'This item doesn\'t exists'});
+    } else {
+      return res.status(200).json({status: 200, data: todo, message: "Succesfully Todo Recieved"});
+    }
   } catch(e) {
     return res.status(400).json({status: 400, message: e.message});
   }
 }
 
-exports.createTodo = async function(req, res, next){
+exports.createTodo = async function(req, res, next) {
     var todo = {
         description: req.body.description,
         status: req.body.status,
@@ -43,7 +44,7 @@ exports.createTodo = async function(req, res, next){
     }
 }
 
-exports.updateTodo = async function(req, res, next){
+exports.updateTodo = async function(req, res, next) {
 
     if(!req.body._id){
         return res.status(400).json({status: 400., message: "Id must be present"});
@@ -64,11 +65,11 @@ exports.updateTodo = async function(req, res, next){
         var updatedTodo = await TodoService.updateTodo(todo);
         return res.status(200).json({status: 200, data: updatedTodo, message: "Succesfully Updated Tod"});
     } catch(e) {
-        return res.status(400).json({status: 400., message: e.message});
+        return res.status(400).json({status: 400, message: e.message});
     }
 }
 
-exports.removeTodo = async function(req, res, next){
+exports.removeTodo = async function(req, res, next) {
 
     var id = req.params.id;
 
